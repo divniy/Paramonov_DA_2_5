@@ -15,11 +15,16 @@ namespace Netology.MoreAboutOOP.Installers
         
         public override void InstallBindings()
         {
-            Container.BindFactory<PlayerController, PlayerController.Factory>()
-                .FromComponentInNewPrefab(_playerSettings.PlayerPrefab);
+            // Container.BindFactory<PlayerController, PlayerController.Factory>()
+                // .FromComponentInNewPrefab(_playerSettings.PlayerPrefab);
+                
+            // Container.Bind<PlayerController>().FromFactory<PlayerController.Factory>().AsSingle();
+            Container.Bind<PlayerSpawnPoint>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<PlayerController>().FromComponentInNewPrefab(_playerSettings.PlayerPrefab).AsSingle();
+            Container.Bind<PlayerInputHandler>().AsSingle();
+
+
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
-
-
             // TODO Implement IPoolable on facade, then add IMemoryPool's behaviours here
             var commonEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Common).Prefab;
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.CommonEnemyFactory>()
@@ -35,6 +40,11 @@ namespace Netology.MoreAboutOOP.Installers
 
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
                 .FromFactory<CompositeEnemyFactory>();
+
+            Container.BindFactory<ProjectileTypes, ProjectileIntensions, ProjectileModel, ProjectileModel.Factory>()
+                .FromSubContainerResolve()
+                .ByNewGameObjectInstaller<ProjectileInstaller>()
+                .UnderTransformGroup("Projectiles");
             
             /*
             Container.BindFactory<UnityEngine.Object, EnemyFacade, EnemyFacade.Factory>()
@@ -45,7 +55,7 @@ namespace Netology.MoreAboutOOP.Installers
                     // .UnderTransformGroup("FooPool")
                 );
             */
-            Container.BindInterfacesAndSelfTo<GameInitializer>().AsSingle();
+            // Container.BindInterfacesAndSelfTo<GameInitializer>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
         }
         

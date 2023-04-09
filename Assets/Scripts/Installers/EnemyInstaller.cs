@@ -1,3 +1,4 @@
+using Netology.MoreAboutOOP.Player;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,8 @@ namespace Netology.MoreAboutOOP.Installers
         private EnemyData _enemyData;
         [Inject]
         private Vector3 _position;
+
+        [Inject] private PlayerController _playerController;
         
         public override void InstallBindings()
         {

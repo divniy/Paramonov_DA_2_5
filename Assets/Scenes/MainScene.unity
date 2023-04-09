@@ -733,6 +733,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1171957454463616261, guid: 9b70fd31068004958be2c1fe2203f4d4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1171957454463616263, guid: 9b70fd31068004958be2c1fe2203f4d4, type: 3}
       propertyPath: m_Name
       value: PlayerSpawnPoint
