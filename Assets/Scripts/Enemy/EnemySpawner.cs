@@ -32,7 +32,7 @@ namespace Netology.MoreAboutOOP
                 var enemy = _enemyFactory.Create(enemyData, enemyPosition);
                 Debug.LogFormat("After spawn enemy: {0}", enemy);
                 // enemy.Transform.position = enemySpawnPoint.transform.position;
-                Debug.LogFormat("After set enemy position {0}", enemy.Transform.position);
+                Debug.LogFormat("After set enemy position {0}", enemy.transform.position);
             }
         }
 
@@ -44,16 +44,6 @@ namespace Netology.MoreAboutOOP
             public EnemyData ForEnemyType(EnemyTypes enemyType)
             {
                 return Enemies.First(_ => _.Type == enemyType);
-            }
-
-            public Dictionary<EnemyTypes, EnemyData> EnemyDictionary()
-            {
-                Dictionary<EnemyTypes, EnemyData> result = new();
-                foreach (var enemy in Enemies)
-                {
-                    result.Add(enemy.Type, enemy);
-                }
-                return result;
             }
         }
     }

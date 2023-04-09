@@ -3,12 +3,12 @@ using Netology.MoreAboutOOP.Player;
 
 namespace Netology.MoreAboutOOP
 {
-    public class GameController : IInitializable
+    public class GameInitializer : IInitializable
     {
         private PlayerController.Factory _playerFactory;
         private PlayerController _playerController;
         
-        public GameController(PlayerController.Factory playerFactory)
+        public GameInitializer(PlayerController.Factory playerFactory)
         {
             _playerFactory = playerFactory;
         }

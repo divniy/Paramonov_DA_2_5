@@ -1,7 +1,7 @@
 using Zenject;
-using System;
 using Netology.MoreAboutOOP.Player;
 using UnityEngine;
+using System;
 
 namespace Netology.MoreAboutOOP.Installers
 {
@@ -9,6 +9,9 @@ namespace Netology.MoreAboutOOP.Installers
     {
         [Inject]
         private PlayerSettings _playerSettings;
+
+        [Inject] 
+        private EnemySpawner.Settings _enemiesSettings;
         
         public override void InstallBindings()
         {
@@ -17,11 +20,22 @@ namespace Netology.MoreAboutOOP.Installers
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
 
 
-            Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
+            // TODO Implement IPoolable on facade, then add IMemoryPool's behaviours here
+            var commonEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Common).Prefab;
+            Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.CommonEnemyFactory>()
                 .FromSubContainerResolve()
-                .ByNewGameObjectInstaller<EnemyInstaller>()
-                .WithGameObjectName("Enemy")
+                .ByNewPrefabInstaller<EnemyInstaller>(commonEnemyPrefab)
                 .UnderTransformGroup("Enemies");
+            
+            var strongEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Strong).Prefab;
+            Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.StrongEnemyFactory>()
+                .FromSubContainerResolve()
+                .ByNewPrefabInstaller<EnemyInstaller>(strongEnemyPrefab)
+                .UnderTransformGroup("Enemies");
+
+            Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
+                .FromFactory<CompositeEnemyFactory>();
+            
             /*
             Container.BindFactory<UnityEngine.Object, EnemyFacade, EnemyFacade.Factory>()
                 .FromMonoPoolableMemoryPool(poolBinder => poolBinder
@@ -31,9 +45,7 @@ namespace Netology.MoreAboutOOP.Installers
                     // .UnderTransformGroup("FooPool")
                 );
             */
-            // Container.BindFactory<UnityEngine.Object, EnemyFacade, EnemyFacade.Factory>()
-            // .FromFactory<PrefabFactory<EnemyFacade>>();
-            Container.BindInterfacesAndSelfTo<GameController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameInitializer>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
         }
         
