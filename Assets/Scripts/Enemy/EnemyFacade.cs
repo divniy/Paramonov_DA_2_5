@@ -1,26 +1,47 @@
 using System;
+using Netology.MoreAboutOOP.Player;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
+using IPoolable = Zenject.IPoolable;
 
 namespace Netology.MoreAboutOOP
 {
     // TODO: Implement IPoolable<IMemoryPool> for more real-world's like behaviour
-    public class EnemyFacade : MonoBehaviour
+    public class EnemyFacade : MonoBehaviour, IPoolable<EnemyData, Vector3, IMemoryPool>, IDisposable
     {
         private EnemyData _enemyData;
+        private IMemoryPool _pool;
+        [Inject] private PlayerController _player;
         
-        [Inject]
-        public void Construct(EnemyData enemyData, Vector3 position)
-        {
-            _enemyData = enemyData;
-            transform.position = position;
-        }
+        // [Inject]
+        // public void Construct(EnemyData enemyData, Vector3 position)
+        // {
+            // _enemyData = enemyData;
+            // transform.position = position;
+        // }
 
         private void Start()
         {
             Debug.Log("Start on EnemyFacede");
             Debug.Log(_enemyData.Serialize());
+        }
+
+        public void OnSpawned(EnemyData enemyData, Vector3 position, IMemoryPool pool)
+        {
+            _pool = pool;
+            _enemyData = enemyData;
+            transform.position = position;
+        }
+
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
+        
+        public void Dispose()
+        {
+            _pool.Despawn(this);
         }
 
         public class CommonEnemyFactory : PlaceholderFactory<EnemyData, Vector3, EnemyFacade>
@@ -46,7 +67,6 @@ namespace Netology.MoreAboutOOP
         {
             _commonEnemyFactory = commonEnemyFactory;
             _strongEnemyFactory = strongEnemyFactory;
-
         }
         
         public EnemyFacade Create(EnemyData param1, Vector3 param2)

@@ -26,15 +26,23 @@ namespace Netology.MoreAboutOOP.Installers
             // TODO Implement IPoolable on facade, then add IMemoryPool's behaviours here
             var commonEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Common).Prefab;
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.CommonEnemyFactory>()
-                .FromSubContainerResolve()
-                .ByNewPrefabInstaller<EnemyInstaller>(commonEnemyPrefab)
-                .UnderTransformGroup("Enemies");
-            
+                .FromMonoPoolableMemoryPool(x => x
+                    .WithInitialSize(2)
+                    // .FromSubContainerResolve()
+                    // .ByNewPrefabInstaller<EnemyInstaller>(commonEnemyPrefab)
+                    .FromComponentInNewPrefab(commonEnemyPrefab)
+                    .UnderTransformGroup("Enemies"));
+
             var strongEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Strong).Prefab;
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.StrongEnemyFactory>()
-                .FromSubContainerResolve()
-                .ByNewPrefabInstaller<EnemyInstaller>(strongEnemyPrefab)
-                .UnderTransformGroup("Enemies");
+                .FromMonoPoolableMemoryPool(x => x
+                    .WithInitialSize(2)
+                    .FromComponentInNewPrefab(strongEnemyPrefab)
+                    .UnderTransformGroup("Enemies"));
+            // Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.StrongEnemyFactory>()
+            //     .FromSubContainerResolve()
+            //     .ByNewPrefabInstaller<EnemyInstaller>(strongEnemyPrefab)
+            //     .UnderTransformGroup("Enemies");
 
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
                 .FromFactory<CompositeEnemyFactory>();
