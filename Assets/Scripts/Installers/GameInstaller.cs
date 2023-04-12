@@ -18,11 +18,9 @@ namespace Netology.MoreAboutOOP.Installers
             // Container.BindFactory<PlayerController, PlayerController.Factory>()
                 // .FromComponentInNewPrefab(_playerSettings.PlayerPrefab);
                 
-            // Container.Bind<PlayerController>().FromFactory<PlayerController.Factory>().AsSingle();
             Container.Bind<PlayerSpawnPoint>().FromComponentInHierarchy().AsSingle();
             Container.Bind<PlayerController>().FromComponentInNewPrefab(_playerSettings.PlayerPrefab).AsSingle();
             Container.Bind<PlayerInputHandler>().AsSingle();
-
 
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
             // TODO Implement IPoolable on facade, then add IMemoryPool's behaviours here
