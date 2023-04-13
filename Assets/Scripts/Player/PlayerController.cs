@@ -16,7 +16,6 @@ namespace Netology.MoreAboutOOP.Player
             _playerSpawnPoint = playerSpawnPoint;
         }
         
-        [Inject] private ProjectileModel.Factory _projectileFactory;
         [Inject] private Settings _settings;
         
         public float MoveSpeed => _settings.MoveSpeed;
@@ -45,14 +44,6 @@ namespace Netology.MoreAboutOOP.Player
             StopCoroutine(FlatMovementCoroutine());
         }
 
-        private void Update()
-        {
-            // if (Input.GetKey(KeyCode.Space))
-            // {
-            //     _projectileFactory.Create(ProjectileTypes.Rocket, ProjectileIntensions.Friendly);
-            // }
-        }
-        
         private IEnumerator FlatMovementCoroutine()
         {
             while (true)

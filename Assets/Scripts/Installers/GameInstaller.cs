@@ -79,11 +79,6 @@ namespace Netology.MoreAboutOOP.Installers
             Container.Bind<ProjectileRegistry>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ProjectileMover>().AsSingle().NonLazy();
             
-            Container.BindFactory<ProjectileTypes, ProjectileIntensions, ProjectileModel, ProjectileModel.Factory>()
-                .FromSubContainerResolve()
-                .ByNewGameObjectInstaller<ProjectileInstaller>()
-                .UnderTransformGroup("Projectiles");
-
             Container
                 .BindFactory<Transform, ProjectileTypes, ProjectileIntensions, ProjectileFacade,
                     ProjectileFacade.BulletFactory>()
