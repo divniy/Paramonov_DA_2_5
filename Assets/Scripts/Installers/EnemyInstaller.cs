@@ -6,17 +6,20 @@ namespace Netology.MoreAboutOOP.Installers
 {
     public class EnemyInstaller : Installer<EnemyInstaller>
     {
-        [Inject]
-        private EnemyData _enemyData;
-        [Inject]
-        private Vector3 _position;
-
-        [Inject] private PlayerController _playerController;
+        // [Inject]
+        // private EnemyData _enemyData;
+        // [Inject]
+        // private Vector3 _position;
+        //
+        // [Inject] private PlayerController _playerController;
         
         public override void InstallBindings()
         {
-            Container.BindInstance(_enemyData).AsSingle();
-            Container.BindInstance(_position).WhenInjectedInto<EnemyFacade>();
+            Container.Bind<EnemyFacade>().FromComponentOnRoot().AsSingle().NonLazy();
+            Container.Bind<EnemyHitHandler>().FromComponentInHierarchy().AsSingle().NonLazy();
+            
+            // Container.BindInstance(_enemyData).AsSingle();
+            // Container.BindInstance(_position).WhenInjectedInto<EnemyFacade>();
             // Container.Bind<EnemyFacade>().AsSingle();
             // Container.Bind<Transform>().FromComponentOnRoot();
             // Container.BindInstance(_position).WhenInjectedInto<Initializer>();
