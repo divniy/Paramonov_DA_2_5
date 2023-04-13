@@ -28,7 +28,12 @@ namespace Netology.MoreAboutOOP
             _intension = intension;
             transform.position = tr.position;
             transform.rotation = tr.rotation;
+            // transform.position += transform.forward + transform.up;
+            var offset = new Vector3(0, 1, 1);
+            transform.Translate(offset);
+            
             _spawnTime = Time.realtimeSinceStartup;
+            // Debug.LogFormat("Spawn bullet pos {0} rot {1}", transform.position, transform.eulerAngles);
             _registry.Add(this);
         }
         
@@ -47,7 +52,8 @@ namespace Netology.MoreAboutOOP
         public bool IsExpired() => Time.realtimeSinceStartup - _spawnTime > Lifetime;
         public void Tick()
         {
-            transform.Translate(transform.forward * Speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+            // transform.position += transform.forward * Speed * Time.deltaTime;
         }
         // private void Update() => Tick();
 

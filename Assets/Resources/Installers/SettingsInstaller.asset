@@ -15,7 +15,7 @@ MonoBehaviour:
   MainSettings:
     TestNumber: 5
   PlayerSettings:
-    PlayerPrefab: {fileID: 7412328941901567853, guid: d30ad53f56f7241f4af3f325430d47cd, type: 3}
+    PlayerPrefab: {fileID: 3351285156099201430, guid: 8044ebdc5bbb44717a2bf3c460af87a1, type: 3}
   PlayerControllerSettings:
     MoveSpeed: 10
     TurnSpeed: 60
