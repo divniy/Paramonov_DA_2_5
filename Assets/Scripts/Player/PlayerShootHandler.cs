@@ -7,6 +7,7 @@ namespace Netology.MoreAboutOOP.Player
     public class PlayerShootHandler : ITickable
     {
         private readonly PlayerController _player;
+        private readonly PlayerInputHandler _inputHandler;
         private readonly ProjectileFacade.Factory _projectileFactory;
         private readonly ProjectileFacade.Settings[] _projectilSettingsArray;
         private float _lastFireTime = 0;
@@ -15,10 +16,12 @@ namespace Netology.MoreAboutOOP.Player
 
         public PlayerShootHandler(
             PlayerController _player, 
+            PlayerInputHandler inputHandler,
             ProjectileFacade.Factory _projectileFactory,
             ProjectileFacade.Settings[] _projectilSettingsArray)
         {
             this._player = _player;
+            _inputHandler = inputHandler;
             this._projectileFactory = _projectileFactory;
             this._projectilSettingsArray = _projectilSettingsArray;
         }
@@ -27,7 +30,7 @@ namespace Netology.MoreAboutOOP.Player
         {
             // Debug.Log("PlayerShootHandler Tick");
             // Debug.Log(_player.IsFiring);
-            if (_player.IsFiring && Time.realtimeSinceStartup - _lastFireTime > fireRate)
+            if (_inputHandler.IsFiring && Time.realtimeSinceStartup - _lastFireTime > fireRate)
             {
                 _lastFireTime = Time.realtimeSinceStartup;
                 Fire();

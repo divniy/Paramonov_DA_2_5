@@ -22,8 +22,6 @@ namespace Netology.MoreAboutOOP.Player
         public float TurnSpeed => _settings.TurnSpeed;
         public ProjectileTypes ProjectileType => _settings.ProjectileType;
 
-        public bool IsFiring;
-        
         private Vector2 _moveAmount;
         private float _turnAmount;
 
@@ -64,18 +62,6 @@ namespace Netology.MoreAboutOOP.Player
         public void Turn(float angle)
         {
             _turnAmount = angle;
-        }
-
-        public void StartFire()
-        {
-            Debug.Log("Start fire");
-            IsFiring = true;
-        }
-
-        public void StopFire()
-        {
-            Debug.Log("Stop fire");
-            IsFiring = false;
         }
 
         public class Factory : PlaceholderFactory<PlayerController>{}

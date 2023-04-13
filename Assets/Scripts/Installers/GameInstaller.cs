@@ -70,7 +70,8 @@ namespace Netology.MoreAboutOOP.Installers
 
         private void InstallPlayer(DiContainer subContainer)
         {
-            subContainer.Bind<PlayerController>().FromComponentOnRoot().AsSingle();
+            subContainer.Bind<PlayerController>().FromComponentOnRoot().AsSingle().NonLazy();
+            subContainer.Bind<PlayerInputHandler>().FromComponentOnRoot().AsSingle().NonLazy();
             subContainer.BindInterfacesTo<PlayerShootHandler>().AsSingle();
         }
 
