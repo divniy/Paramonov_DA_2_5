@@ -79,11 +79,6 @@ namespace Netology.MoreAboutOOP.Installers
             subContainer.BindInterfacesTo<PlayerShootHandler>().AsSingle();
         }
 
-        private void InstallEnemy(DiContainer subContainer)
-        {
-            subContainer.Bind<EnemyFacade>().FromComponentOnRoot().AsSingle().NonLazy();
-        }
-
         private void installProjectiles()
         {
             Container.Bind<ProjectileRegistry>().AsSingle().NonLazy();

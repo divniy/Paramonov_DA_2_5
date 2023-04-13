@@ -15,6 +15,9 @@ namespace Netology.MoreAboutOOP
         private IMemoryPool _pool;
         public float Speed => _settings.Speed;
         public float Lifetime => _settings.Lifetime;
+        public float Damage => _settings.Damage;
+
+        public ProjectileIntensions Intension => _intension;
         
         private float _spawnTime;
 
@@ -65,6 +68,7 @@ namespace Netology.MoreAboutOOP
             public float Speed;
             public float FireRate;
             public float Lifetime;
+            public float Damage;
         }
     }
 

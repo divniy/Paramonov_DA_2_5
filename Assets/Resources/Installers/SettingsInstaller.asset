@@ -34,8 +34,10 @@ MonoBehaviour:
     Speed: 20
     FireRate: 0.5
     Lifetime: 1
+    Damage: 10
   - Type: 1
     Prefab: {fileID: 3437719076390042497, guid: f3c1872365930419994139c5848873cb, type: 3}
     Speed: 15
     FireRate: 1
     Lifetime: 1.5
+    Damage: 20

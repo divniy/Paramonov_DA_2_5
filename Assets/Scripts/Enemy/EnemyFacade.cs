@@ -13,6 +13,8 @@ namespace Netology.MoreAboutOOP
         private EnemyData _enemyData;
         private IMemoryPool _pool;
         [Inject] private PlayerController _player;
+        [Inject] private HealthHolder _healthHolder;
+        public float MaxHealth => _enemyData.MaxHealth;
         
         // [Inject]
         // public void Construct(EnemyData enemyData, Vector3 position)
@@ -32,6 +34,7 @@ namespace Netology.MoreAboutOOP
             _pool = pool;
             _enemyData = enemyData;
             transform.position = position;
+            _healthHolder.SetHealth(enemyData.MaxHealth);
         }
 
         public void OnDespawned()

@@ -15,9 +15,11 @@ namespace Netology.MoreAboutOOP.Installers
         
         public override void InstallBindings()
         {
-            Container.Bind<EnemyFacade>().FromComponentOnRoot().AsSingle().NonLazy();
-            Container.Bind<EnemyHitHandler>().FromComponentInHierarchy().AsSingle().NonLazy();
-            
+            Container.Bind<EnemyFacade>().FromComponentOnRoot().AsSingle();
+            Container.Bind<EnemyHitHandler>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<HealthHolder>().AsSingle();
+            // Container.Bind<IHealthOwner>().To<EnemyFacade>().AsCached().WhenInjectedInto<HealthHolder>();
+
             // Container.BindInstance(_enemyData).AsSingle();
             // Container.BindInstance(_position).WhenInjectedInto<EnemyFacade>();
             // Container.Bind<EnemyFacade>().AsSingle();
