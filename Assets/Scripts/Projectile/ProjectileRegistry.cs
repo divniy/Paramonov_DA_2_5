@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
-using Zenject;
 
 namespace Netology.MoreAboutOOP
 {
-    public class ProjectileMoverRegistry : ITickable
+    public class ProjectileRegistry
     {
         private List<ProjectileFacade> _projectiles = new();
+
+        public IEnumerable<ProjectileFacade> Projectiles => _projectiles;
 
         public void Add(ProjectileFacade projectile)
         {
@@ -16,15 +16,6 @@ namespace Netology.MoreAboutOOP
         public void Remove(ProjectileFacade projectile)
         {
             _projectiles.Remove(projectile);
-        }
-
-        public void Tick()
-        {
-            foreach (var projectile in _projectiles.ToList())
-            {
-                projectile.Tick();
-                if (projectile.IsExpired()) projectile.Dispose();
-            }
         }
     }
 }

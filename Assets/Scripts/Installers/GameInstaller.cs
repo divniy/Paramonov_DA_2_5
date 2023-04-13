@@ -53,7 +53,31 @@ namespace Netology.MoreAboutOOP.Installers
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
                 .FromFactory<CompositeEnemyFactory>();
 
-            Container.BindInterfacesAndSelfTo<ProjectileMoverRegistry>().AsSingle().NonLazy();
+            installProjectiles();
+            
+            /*
+            Container.BindFactory<UnityEngine.Object, EnemyFacade, EnemyFacade.Factory>()
+                .FromMonoPoolableMemoryPool(poolBinder => poolBinder
+                        .FromFactory<PrefabFactory<EnemyFacade>>()
+                        .WithInitialSize(5)
+                        
+                    // .UnderTransformGroup("FooPool")
+                );
+            */
+            // Container.BindInterfacesAndSelfTo<GameInitializer>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
+        }
+
+        private void InstallPlayer(DiContainer subContainer)
+        {
+            subContainer.Bind<PlayerController>().FromComponentOnRoot().AsSingle();
+            subContainer.BindInterfacesTo<PlayerShootHandler>().AsSingle();
+        }
+
+        private void installProjectiles()
+        {
+            Container.Bind<ProjectileRegistry>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ProjectileMover>().AsSingle().NonLazy();
             
             Container.BindFactory<ProjectileTypes, ProjectileIntensions, ProjectileModel, ProjectileModel.Factory>()
                 .FromSubContainerResolve()
@@ -73,31 +97,13 @@ namespace Netology.MoreAboutOOP.Installers
                 .BindFactory<Transform, ProjectileTypes, ProjectileIntensions, ProjectileFacade,
                     ProjectileFacade.RocketFactory>()
                 .FromMonoPoolableMemoryPool(x => x
-                    .WithInitialSize(10)
+                    .WithInitialSize(5)
                     .FromNewComponentOnNewPrefab(_projectileSettings.First(_ => _.Type == ProjectileTypes.Rocket).Prefab)
                     .UnderTransformGroup("Projectiles")
                 );
 
             Container.BindFactory<Transform, ProjectileTypes, ProjectileIntensions, ProjectileFacade,
                 ProjectileFacade.Factory>().FromFactory<CompositeProjectileFactory>();
-            
-            /*
-            Container.BindFactory<UnityEngine.Object, EnemyFacade, EnemyFacade.Factory>()
-                .FromMonoPoolableMemoryPool(poolBinder => poolBinder
-                        .FromFactory<PrefabFactory<EnemyFacade>>()
-                        .WithInitialSize(5)
-                        
-                    // .UnderTransformGroup("FooPool")
-                );
-            */
-            // Container.BindInterfacesAndSelfTo<GameInitializer>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
-        }
-
-        private void InstallPlayer(DiContainer subContainer)
-        {
-            subContainer.Bind<PlayerController>().FromComponentOnRoot().AsSingle();
-            subContainer.BindInterfacesTo<PlayerShootHandler>().AsSingle();
         }
         
 

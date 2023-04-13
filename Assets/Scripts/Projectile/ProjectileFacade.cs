@@ -8,7 +8,7 @@ namespace Netology.MoreAboutOOP
     public class ProjectileFacade : MonoBehaviour, IPoolable<Transform, ProjectileTypes, ProjectileIntensions, IMemoryPool>, IDisposable
     {
         [Inject] private Settings[] _settingsList;
-        [Inject] private ProjectileMoverRegistry _registry;
+        [Inject] private ProjectileRegistry _registry;
         
         private Settings _settings;
         private ProjectileIntensions _intension;
