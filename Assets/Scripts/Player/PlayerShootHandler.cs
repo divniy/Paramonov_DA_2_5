@@ -10,7 +10,7 @@ namespace Netology.MoreAboutOOP.Player
         private readonly ProjectileFacade.Factory _projectileFactory;
         private readonly ProjectileFacade.Settings[] _projectilSettingsArray;
         private float _lastFireTime = 0;
-        private ProjectileTypes projectileType => ProjectileTypes.Bullet;
+        private ProjectileTypes projectileType => _player.ProjectileType;
         private float fireRate => _projectilSettingsArray.First(_ => _.Type == projectileType).FireRate;
 
         public PlayerShootHandler(

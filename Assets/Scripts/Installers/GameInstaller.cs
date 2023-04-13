@@ -53,6 +53,8 @@ namespace Netology.MoreAboutOOP.Installers
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
                 .FromFactory<CompositeEnemyFactory>();
 
+            Container.BindInterfacesAndSelfTo<ProjectileMoverRegistry>().AsSingle().NonLazy();
+            
             Container.BindFactory<ProjectileTypes, ProjectileIntensions, ProjectileModel, ProjectileModel.Factory>()
                 .FromSubContainerResolve()
                 .ByNewGameObjectInstaller<ProjectileInstaller>()

@@ -21,6 +21,7 @@ namespace Netology.MoreAboutOOP.Player
         
         public float MoveSpeed => _settings.MoveSpeed;
         public float TurnSpeed => _settings.TurnSpeed;
+        public ProjectileTypes ProjectileType => _settings.ProjectileType;
 
         public bool IsFiring;
         
@@ -93,6 +94,7 @@ namespace Netology.MoreAboutOOP.Player
         {
             public float MoveSpeed;
             public float TurnSpeed;
+            public ProjectileTypes ProjectileType;
         }
     }
 }

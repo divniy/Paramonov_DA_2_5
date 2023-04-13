@@ -19,6 +19,7 @@ MonoBehaviour:
   PlayerControllerSettings:
     MoveSpeed: 10
     TurnSpeed: 60
+    ProjectileType: 1
   EnemySettings:
     Enemies:
     - Type: 0
@@ -30,9 +31,11 @@ MonoBehaviour:
   Projectiles:
   - Type: 0
     Prefab: {fileID: 976231421010143624, guid: e8e729591676c45678fcd66bb7f67049, type: 3}
-    Speed: 100
+    Speed: 20
     FireRate: 0.5
+    Lifetime: 1
   - Type: 1
     Prefab: {fileID: 3437719076390042497, guid: f3c1872365930419994139c5848873cb, type: 3}
-    Speed: 70
-    FireRate: 0.8
+    Speed: 15
+    FireRate: 1
+    Lifetime: 1.5

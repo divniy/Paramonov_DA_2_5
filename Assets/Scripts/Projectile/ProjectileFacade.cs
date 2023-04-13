@@ -8,14 +8,15 @@ namespace Netology.MoreAboutOOP
     public class ProjectileFacade : MonoBehaviour, IPoolable<Transform, ProjectileTypes, ProjectileIntensions, IMemoryPool>, IDisposable
     {
         [Inject] private Settings[] _settingsList;
+        [Inject] private ProjectileMoverRegistry _registry;
+        
         private Settings _settings;
         private ProjectileIntensions _intension;
         private IMemoryPool _pool;
+        public float Speed => _settings.Speed;
+        public float Lifetime => _settings.Lifetime;
         
-        public void OnDespawned()
-        {
-            _pool = null;
-        }
+        private float _spawnTime;
 
         public void OnSpawned(Transform tr, ProjectileTypes type, ProjectileIntensions intension, IMemoryPool pool)
         {
@@ -24,13 +25,28 @@ namespace Netology.MoreAboutOOP
             _intension = intension;
             transform.position = tr.position;
             transform.rotation = tr.rotation;
+            _spawnTime = Time.realtimeSinceStartup;
+            _registry.Add(this);
         }
-
+        
+        public void OnDespawned()
+        {
+            Debug.Log("Dispawn projectile");
+            _registry.Remove(this);
+            _pool = null;
+        }
+        
         public void Dispose()
         {
             _pool.Despawn(this);
-            throw new NotImplementedException();
         }
+        
+        public bool IsExpired() => Time.realtimeSinceStartup - _spawnTime > Lifetime;
+        public void Tick()
+        {
+            transform.Translate(transform.forward * Speed * Time.deltaTime);
+        }
+        // private void Update() => Tick();
 
         public class
             BulletFactory : PlaceholderFactory<Transform, ProjectileTypes, ProjectileIntensions, ProjectileFacade> { }
@@ -48,6 +64,7 @@ namespace Netology.MoreAboutOOP
             public GameObject Prefab;
             public float Speed;
             public float FireRate;
+            public float Lifetime;
         }
     }
 
