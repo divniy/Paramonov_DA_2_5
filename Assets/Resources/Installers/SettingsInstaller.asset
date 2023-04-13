@@ -27,16 +27,12 @@ MonoBehaviour:
     - Type: 1
       Prefab: {fileID: 7647585798792018610, guid: 985bacedf65cc49b29adbeafaa8d2518, type: 3}
       MaxHealth: 500
-  ProjectileSettings:
+  Projectiles:
   - Type: 0
-    ViewPrefab: {fileID: 976231421010143624, guid: e8e729591676c45678fcd66bb7f67049, type: 3}
-    _speed: 130
-    _damage: 10
-    _fireRate: 0.5
-    _lifetime: 3
+    Prefab: {fileID: 976231421010143624, guid: e8e729591676c45678fcd66bb7f67049, type: 3}
+    Speed: 100
+    FireRate: 0.5
   - Type: 1
-    ViewPrefab: {fileID: 3437719076390042497, guid: f3c1872365930419994139c5848873cb, type: 3}
-    _speed: 130
-    _damage: 10
-    _fireRate: 0.5
-    _lifetime: 3
+    Prefab: {fileID: 3437719076390042497, guid: f3c1872365930419994139c5848873cb, type: 3}
+    Speed: 70
+    FireRate: 0.8

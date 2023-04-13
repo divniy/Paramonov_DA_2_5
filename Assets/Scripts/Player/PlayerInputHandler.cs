@@ -7,6 +7,7 @@ namespace Netology.MoreAboutOOP.Player
     public class PlayerInputHandler : MonoBehaviour
     {
         private PlayerController _playerController;
+        // public bool IsFiring { get; private set; } = false;
         
         [Inject]
         public void Construct(PlayerController playerController)
@@ -30,8 +31,8 @@ namespace Netology.MoreAboutOOP.Player
     
         public void OnFire(InputAction.CallbackContext context)
         {
-            if(context.started) _playerController.StartFire();
-            if(context.performed) _playerController.StopFire();
+            if (context.started) _playerController.StartFire();
+            if(context.canceled) _playerController.StopFire();
         }
     }
 }

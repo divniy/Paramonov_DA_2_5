@@ -2,6 +2,7 @@ using Zenject;
 using Netology.MoreAboutOOP.Player;
 using UnityEngine;
 using System;
+using System.Linq;
 
 namespace Netology.MoreAboutOOP.Installers
 {
@@ -12,6 +13,8 @@ namespace Netology.MoreAboutOOP.Installers
 
         [Inject] 
         private EnemySpawner.Settings _enemiesSettings;
+
+        [Inject] private ProjectileFacade.Settings[] _projectileSettings;
         
         public override void InstallBindings()
         {
@@ -19,8 +22,11 @@ namespace Netology.MoreAboutOOP.Installers
                 // .FromComponentInNewPrefab(_playerSettings.PlayerPrefab);
                 
             Container.Bind<PlayerSpawnPoint>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<PlayerController>().FromComponentInNewPrefab(_playerSettings.PlayerPrefab).AsSingle();
-            Container.Bind<PlayerInputHandler>().AsSingle();
+            // Container.Bind<PlayerController>().FromComponentInNewPrefab(_playerSettings.PlayerPrefab).AsSingle();
+            Container.Bind<PlayerController>()
+                .FromSubContainerResolve()
+                .ByNewPrefabMethod(_playerSettings.PlayerPrefab, InstallPlayer)
+                .AsSingle();
 
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
             // TODO Implement IPoolable on facade, then add IMemoryPool's behaviours here
@@ -51,6 +57,27 @@ namespace Netology.MoreAboutOOP.Installers
                 .FromSubContainerResolve()
                 .ByNewGameObjectInstaller<ProjectileInstaller>()
                 .UnderTransformGroup("Projectiles");
+
+            Container
+                .BindFactory<Transform, ProjectileTypes, ProjectileIntensions, ProjectileFacade,
+                    ProjectileFacade.BulletFactory>()
+                .FromMonoPoolableMemoryPool(x => x
+                    .WithInitialSize(10)
+                    .FromNewComponentOnNewPrefab(_projectileSettings.First(_ => _.Type == ProjectileTypes.Bullet).Prefab)
+                    .UnderTransformGroup("Projectiles")
+                );
+            
+            Container
+                .BindFactory<Transform, ProjectileTypes, ProjectileIntensions, ProjectileFacade,
+                    ProjectileFacade.RocketFactory>()
+                .FromMonoPoolableMemoryPool(x => x
+                    .WithInitialSize(10)
+                    .FromNewComponentOnNewPrefab(_projectileSettings.First(_ => _.Type == ProjectileTypes.Rocket).Prefab)
+                    .UnderTransformGroup("Projectiles")
+                );
+
+            Container.BindFactory<Transform, ProjectileTypes, ProjectileIntensions, ProjectileFacade,
+                ProjectileFacade.Factory>().FromFactory<CompositeProjectileFactory>();
             
             /*
             Container.BindFactory<UnityEngine.Object, EnemyFacade, EnemyFacade.Factory>()
@@ -63,6 +90,12 @@ namespace Netology.MoreAboutOOP.Installers
             */
             // Container.BindInterfacesAndSelfTo<GameInitializer>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
+        }
+
+        private void InstallPlayer(DiContainer subContainer)
+        {
+            subContainer.Bind<PlayerController>().FromComponentOnRoot().AsSingle();
+            subContainer.BindInterfacesTo<PlayerShootHandler>().AsSingle();
         }
         
 

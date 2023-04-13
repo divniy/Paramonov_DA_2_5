@@ -11,14 +11,16 @@ namespace Netology.MoreAboutOOP.Installers
         public Player.PlayerSettings PlayerSettings;
         public PlayerController.Settings PlayerControllerSettings;
         public EnemySpawner.Settings EnemySettings;
-        public ProjectileInstaller.Settings[] ProjectileSettings; 
+        // public ProjectileInstaller.Settings[] ProjectileSettings;
+        public ProjectileFacade.Settings[] Projectiles;
         public override void InstallBindings()
         {
             Container.BindInstance(MainSettings);
             Container.BindInstance(PlayerSettings);
             Container.BindInstance(PlayerControllerSettings);
             Container.BindInstance(EnemySettings);
-            Container.BindInstance(ProjectileSettings);
+            // Container.BindInstance(ProjectileSettings);
+            Container.BindInstance(Projectiles);
         }
     }
 }
