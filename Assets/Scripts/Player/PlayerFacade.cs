@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Netology.MoreAboutOOP.Player
 {
-    public class PlayerFacade : MonoBehaviour
+    public class PlayerFacade : MonoBehaviour, IInitializable
     {
         private PlayerSpawnPoint _playerSpawnPoint;
 
@@ -17,6 +17,7 @@ namespace Netology.MoreAboutOOP.Player
         }
         
         [Inject] private Settings _settings;
+        [Inject] private HealthHolder _healthHolder;
         
         public float MoveSpeed => _settings.MoveSpeed;
         public float TurnSpeed => _settings.TurnSpeed;
@@ -28,13 +29,21 @@ namespace Netology.MoreAboutOOP.Player
 
         private Vector2 _moveAmount;
         private float _turnAmount;
+        
+        public void Initialize()
+        {
+            _healthHolder.SetHealth(_settings.MaxHealth);
+        }
 
         private void Start()
         {
             Debug.Log("Player controller Start called");
+            Debug.LogFormat("Player health: {0}", _healthHolder.Health);
             transform.position = _playerSpawnPoint.transform.position;
             transform.rotation = _playerSpawnPoint.transform.rotation;
         }
+
+
 
         private void OnEnable()
         {
@@ -73,6 +82,7 @@ namespace Netology.MoreAboutOOP.Player
         [Serializable]
         public class Settings
         {
+            public float MaxHealth;
             public float MoveSpeed;
             public float TurnSpeed;
             public ProjectileTypes ProjectileType;

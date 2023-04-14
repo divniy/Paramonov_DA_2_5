@@ -7,9 +7,10 @@ namespace Netology.MoreAboutOOP.Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<PlayerFacade>().FromComponentOnRoot().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerFacade>().FromComponentOnRoot().AsSingle().NonLazy();
             Container.Bind<PlayerInputHandler>().FromComponentOnRoot().AsSingle().NonLazy();
             Container.BindInterfacesTo<PlayerShootHandler>().AsSingle();
+            Container.Bind<HealthHolder>().AsSingle();
         }
     }
 }

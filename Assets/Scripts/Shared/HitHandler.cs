@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Netology.MoreAboutOOP
 {
-    public class EnemyHitHandler : MonoBehaviour
+    public class HitHandler : MonoBehaviour
     {
         [SerializeField] private ProjectileIntensions _hitWithIntension;
         [Inject] private HealthHolder _healthHolder;

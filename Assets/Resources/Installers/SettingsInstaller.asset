@@ -17,6 +17,7 @@ MonoBehaviour:
   PlayerSettings:
     PlayerPrefab: {fileID: 3351285156099201430, guid: 8044ebdc5bbb44717a2bf3c460af87a1, type: 3}
   PlayerControllerSettings:
+    MaxHealth: 1000
     MoveSpeed: 10
     TurnSpeed: 60
     ProjectileType: 1
@@ -25,7 +26,7 @@ MonoBehaviour:
     - Type: 0
       Prefab: {fileID: 7160702175748792602, guid: f43dee03f6573437d87053ccc2314584, type: 3}
       MaxHealth: 100
-      ShootingDistance: 15
+      ShootingDistance: 10
     - Type: 1
       Prefab: {fileID: 7647585798792018610, guid: 985bacedf65cc49b29adbeafaa8d2518, type: 3}
       MaxHealth: 150
@@ -34,7 +35,7 @@ MonoBehaviour:
   - Type: 1
     Prefab: {fileID: 976231421010143624, guid: e8e729591676c45678fcd66bb7f67049, type: 3}
     Speed: 20
-    FireRate: 0.5
+    FireRate: 0.7
     Lifetime: 1
     Damage: 10
   - Type: 2
