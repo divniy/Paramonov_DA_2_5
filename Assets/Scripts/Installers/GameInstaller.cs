@@ -31,6 +31,8 @@ namespace Netology.MoreAboutOOP.Installers
             Container.Bind<EnemyRegistry>().AsSingle().NonLazy();
 
             Container.BindInterfacesTo<EnemyDeathHandler>().AsSingle().NonLazy();
+
+            Container.BindInterfacesTo<EnemiesLookAtPlayer>().AsSingle().NonLazy();
             
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
             

@@ -18,6 +18,7 @@ namespace Netology.MoreAboutOOP.Installers
             Container.Bind<EnemyFacade>().FromComponentOnRoot().AsSingle();
             Container.Bind<EnemyHitHandler>().FromComponentInHierarchy().AsSingle();
             Container.Bind<HealthHolder>().AsSingle();
+            Container.Bind<EnemyHealthBar>().FromComponentOnRoot().AsSingle();
             // Container.Bind<IHealthOwner>().To<EnemyFacade>().AsCached().WhenInjectedInto<HealthHolder>();
 
             // Container.BindInstance(_enemyData).AsSingle();

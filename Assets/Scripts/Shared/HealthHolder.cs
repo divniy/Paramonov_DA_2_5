@@ -13,6 +13,7 @@ namespace Netology.MoreAboutOOP
         private float _health;
         
         public float Health => _health;
+        public float MaxHealth { get; private set; }
 
         public void TakeDamage(float damage)
         {
@@ -21,6 +22,7 @@ namespace Netology.MoreAboutOOP
 
         public void SetHealth(float maxHealth)
         {
+            MaxHealth = maxHealth;
             _health = maxHealth;
         }
     }
