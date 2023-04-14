@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Netology.MoreAboutOOP.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerFacade : MonoBehaviour
     {
         private PlayerSpawnPoint _playerSpawnPoint;
 
@@ -68,7 +68,7 @@ namespace Netology.MoreAboutOOP.Player
             _turnAmount = angle;
         }
 
-        public class Factory : PlaceholderFactory<PlayerController>{}
+        public class Factory : PlaceholderFactory<PlayerFacade>{}
         
         [Serializable]
         public class Settings

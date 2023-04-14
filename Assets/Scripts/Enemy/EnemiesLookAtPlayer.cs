@@ -5,7 +5,7 @@ namespace Netology.MoreAboutOOP
 {
     public class EnemiesLookAtPlayer : ITickable
     {
-        [Inject] private PlayerController _player;
+        [Inject] private PlayerFacade _player;
         [Inject] private EnemyRegistry _registry;
         
         public void Tick()

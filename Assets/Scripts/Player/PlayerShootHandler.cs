@@ -6,7 +6,7 @@ namespace Netology.MoreAboutOOP.Player
 {
     public class PlayerShootHandler : ITickable
     {
-        private readonly PlayerController _player;
+        private readonly PlayerFacade _player;
         private readonly PlayerInputHandler _inputHandler;
         private readonly ProjectileFacade.Factory _projectileFactory;
         private readonly ProjectileFacade.Settings[] _projectilSettingsArray;
@@ -15,7 +15,7 @@ namespace Netology.MoreAboutOOP.Player
         private float fireRate => _projectilSettingsArray.First(_ => _.Type == projectileType).FireRate;
 
         public PlayerShootHandler(
-            PlayerController _player, 
+            PlayerFacade _player, 
             PlayerInputHandler inputHandler,
             ProjectileFacade.Factory _projectileFactory,
             ProjectileFacade.Settings[] _projectilSettingsArray)

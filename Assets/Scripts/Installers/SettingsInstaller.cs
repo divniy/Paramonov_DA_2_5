@@ -9,7 +9,7 @@ namespace Netology.MoreAboutOOP.Installers
     {
         public GameInstaller.Settings MainSettings;
         public Player.PlayerSettings PlayerSettings;
-        public PlayerController.Settings PlayerControllerSettings;
+        public PlayerFacade.Settings PlayerControllerSettings;
         public EnemySpawner.Settings EnemySettings;
         // public ProjectileInstaller.Settings[] ProjectileSettings;
         public ProjectileFacade.Settings[] Projectiles;

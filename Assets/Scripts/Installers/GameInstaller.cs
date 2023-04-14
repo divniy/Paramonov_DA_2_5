@@ -29,7 +29,7 @@ namespace Netology.MoreAboutOOP.Installers
         {
             Container.Bind<PlayerSpawnPoint>().FromComponentInHierarchy().AsSingle();
             // Container.Bind<PlayerController>().FromComponentInNewPrefab(_playerSettings.PlayerPrefab).AsSingle();
-            Container.Bind<PlayerController>()
+            Container.Bind<PlayerFacade>()
                 .FromSubContainerResolve()
                 .ByNewPrefabInstaller<PlayerInstaller>(_playerSettings.PlayerPrefab)
                 .AsSingle();

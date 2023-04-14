@@ -12,7 +12,7 @@ namespace Netology.MoreAboutOOP
     {
         private EnemyData _enemyData;
         private IMemoryPool _pool;
-        [Inject] private PlayerController _player;
+        [Inject] private PlayerFacade _player;
         [Inject] private HealthHolder _healthHolder;
         [Inject] private EnemyRegistry _registry;
         public float MaxHealth => _enemyData.MaxHealth;

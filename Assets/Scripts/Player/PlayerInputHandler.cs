@@ -6,15 +6,15 @@ namespace Netology.MoreAboutOOP.Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
-        private PlayerController _player;
-        [Inject] private PlayerController.Settings _settings;
+        private PlayerFacade _player;
+        [Inject] private PlayerFacade.Settings _settings;
         
         public bool IsFiring { get; private set; } = false;
         
         [Inject]
-        public void Construct(PlayerController playerController)
+        public void Construct(PlayerFacade playerFacade)
         {
-            _player = playerController;
+            _player = playerFacade;
         }
         
         
