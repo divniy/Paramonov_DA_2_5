@@ -505,7 +505,6 @@ GameObject:
   - component: {fileID: 7160702175748792597}
   - component: {fileID: 542092562}
   - component: {fileID: 542092561}
-  - component: {fileID: 745112156865218583}
   m_Layer: 0
   m_Name: CommonEnemy
   m_TagString: Untagged
@@ -560,19 +559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6abb4841604f4aada57d612d520736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &745112156865218583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7160702175748792602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e8733bfb4364440aaa10aea644df10d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slider: {fileID: 3543090632130966548}
 --- !u!1 &7160702176963378895
 GameObject:
   m_ObjectHideFlags: 0

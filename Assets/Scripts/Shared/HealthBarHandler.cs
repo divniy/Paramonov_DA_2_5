@@ -5,17 +5,17 @@ using Zenject;
 
 namespace Netology.MoreAboutOOP
 {
-    public class HealthBarHandler : MonoBehaviour
+    public class HealthBarHandler : IInitializable, ITickable
     {
-        [SerializeField] private Slider _slider;
+        [Inject] private Slider _slider;
         [Inject] private HealthHolder _healthHolder;
 
-        private void Start()
+        public void Initialize()
         {
             _slider.maxValue = _healthHolder.MaxHealth;
         }
 
-        private void Update()
+        public void Tick()
         {
             _slider.value = _healthHolder.Health;
         }

@@ -1,5 +1,6 @@
 using Netology.MoreAboutOOP.Player;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Netology.MoreAboutOOP.Installers
@@ -16,9 +17,10 @@ namespace Netology.MoreAboutOOP.Installers
         public override void InstallBindings()
         {
             Container.Bind<EnemyFacade>().FromComponentOnRoot().AsSingle();
+            Container.Bind<Slider>().FromComponentInHierarchy().AsSingle();
             Container.Bind<HitHandler>().FromComponentInHierarchy().AsSingle();
             Container.Bind<HealthHolder>().AsSingle();
-            Container.Bind<HealthBarHandler>().FromComponentOnRoot().AsSingle();
+            Container.BindInterfacesTo<HealthBarHandler>().AsSingle();
             // Container.Bind<IHealthOwner>().To<EnemyFacade>().AsCached().WhenInjectedInto<HealthHolder>();
 
             // Container.BindInstance(_enemyData).AsSingle();
