@@ -20,7 +20,11 @@ namespace Netology.MoreAboutOOP.Player
         
         public float MoveSpeed => _settings.MoveSpeed;
         public float TurnSpeed => _settings.TurnSpeed;
-        public ProjectileTypes ProjectileType => _settings.ProjectileType;
+        public ProjectileTypes ProjectileType
+        {
+            get => _settings.ProjectileType;
+            set => _settings.ProjectileType = value;
+        }
 
         private Vector2 _moveAmount;
         private float _turnAmount;

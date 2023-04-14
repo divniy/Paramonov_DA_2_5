@@ -2,7 +2,7 @@ namespace Netology.MoreAboutOOP
 {
     public enum ProjectileTypes
     {
-        Bullet,
-        Rocket
+        Bullet = 1,
+        Rocket = 2
     }
 }

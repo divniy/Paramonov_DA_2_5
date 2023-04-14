@@ -27,15 +27,15 @@ MonoBehaviour:
       MaxHealth: 100
     - Type: 1
       Prefab: {fileID: 7647585798792018610, guid: 985bacedf65cc49b29adbeafaa8d2518, type: 3}
-      MaxHealth: 500
+      MaxHealth: 150
   Projectiles:
-  - Type: 0
+  - Type: 1
     Prefab: {fileID: 976231421010143624, guid: e8e729591676c45678fcd66bb7f67049, type: 3}
     Speed: 20
     FireRate: 0.5
     Lifetime: 1
     Damage: 10
-  - Type: 1
+  - Type: 2
     Prefab: {fileID: 3437719076390042497, guid: f3c1872365930419994139c5848873cb, type: 3}
     Speed: 15
     FireRate: 1

@@ -6,33 +6,43 @@ namespace Netology.MoreAboutOOP.Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
-        private PlayerController _playerController;
+        private PlayerController _player;
+        [Inject] private PlayerController.Settings _settings;
+        
         public bool IsFiring { get; private set; } = false;
         
         [Inject]
         public void Construct(PlayerController playerController)
         {
-            _playerController = playerController;
+            _player = playerController;
         }
         
         
         public void OnMove(InputAction.CallbackContext context)
         {
             var moveAmount = context.ReadValue<Vector2>();
-            _playerController.Move(moveAmount);
+            _player.Move(moveAmount);
             
             // Debug.LogFormat("OnMove x={0}, y={1}", moveAmount.x, moveAmount.y);
         }
 
         public void OnTurn(InputAction.CallbackContext context)
         {
-            _playerController.Turn(context.ReadValue<float>());
+            _player.Turn(context.ReadValue<float>());
         }
     
         public void OnFire(InputAction.CallbackContext context)
         {
             if (context.started) IsFiring = true;
             if(context.canceled) IsFiring = false;
+        }
+
+        public void OnChangeWeapon(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                _player.ProjectileType = (ProjectileTypes) context.ReadValue<float>();
+            }
         }
     }
 }

@@ -590,15 +590,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5759760465141370065, guid: 992ef1a86e98642b19b6e65505fdeafe, type: 3}
       propertyPath: _projectileType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8284989356806434972, guid: 992ef1a86e98642b19b6e65505fdeafe, type: 3}
       propertyPath: m_Name
       value: StrongEnemySpawnPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284989356806434972, guid: 992ef1a86e98642b19b6e65505fdeafe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992ef1a86e98642b19b6e65505fdeafe, type: 3}
