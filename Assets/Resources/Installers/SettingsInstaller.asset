@@ -17,7 +17,7 @@ MonoBehaviour:
   PlayerSettings:
     PlayerPrefab: {fileID: 3351285156099201430, guid: 8044ebdc5bbb44717a2bf3c460af87a1, type: 3}
   PlayerControllerSettings:
-    MaxHealth: 1000
+    MaxHealth: 300
     MoveSpeed: 10
     TurnSpeed: 60
     ProjectileType: 1

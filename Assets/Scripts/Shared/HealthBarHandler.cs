@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Netology.MoreAboutOOP
 {
-    public class EnemyHealthBar : MonoBehaviour
+    public class HealthBarHandler : MonoBehaviour
     {
         [SerializeField] private Slider _slider;
         [Inject] private HealthHolder _healthHolder;
