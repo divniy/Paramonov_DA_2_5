@@ -28,8 +28,12 @@ namespace Netology.MoreAboutOOP.Installers
                 .ByNewPrefabMethod(_playerSettings.PlayerPrefab, InstallPlayer)
                 .AsSingle();
 
+            Container.Bind<EnemyRegistry>().AsSingle().NonLazy();
+
+            Container.BindInterfacesTo<EnemyDeathHandler>().AsSingle().NonLazy();
+            
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
-            // TODO Implement IPoolable on facade, then add IMemoryPool's behaviours here
+            
             var commonEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Common).Prefab;
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.CommonEnemyFactory>()
                 .FromMonoPoolableMemoryPool(x => x
