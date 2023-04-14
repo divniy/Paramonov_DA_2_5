@@ -18,24 +18,33 @@ namespace Netology.MoreAboutOOP.Installers
         
         public override void InstallBindings()
         {
-            // Container.BindFactory<PlayerController, PlayerController.Factory>()
-                // .FromComponentInNewPrefab(_playerSettings.PlayerPrefab);
-                
+            InstallPlayer();
+
+            InstallEnemies();
+
+            InstallProjectiles();
+        }
+
+        void InstallPlayer()
+        {
             Container.Bind<PlayerSpawnPoint>().FromComponentInHierarchy().AsSingle();
             // Container.Bind<PlayerController>().FromComponentInNewPrefab(_playerSettings.PlayerPrefab).AsSingle();
             Container.Bind<PlayerController>()
                 .FromSubContainerResolve()
-                .ByNewPrefabMethod(_playerSettings.PlayerPrefab, InstallPlayer)
+                .ByNewPrefabInstaller<PlayerInstaller>(_playerSettings.PlayerPrefab)
                 .AsSingle();
+        }
 
+        void InstallEnemies()
+        {
             Container.Bind<EnemyRegistry>().AsSingle().NonLazy();
 
             Container.BindInterfacesTo<EnemyDeathHandler>().AsSingle().NonLazy();
 
             Container.BindInterfacesTo<EnemiesLookAtPlayer>().AsSingle().NonLazy();
-            
+
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
-            
+
             var commonEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Common).Prefab;
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.CommonEnemyFactory>()
                 .FromMonoPoolableMemoryPool(x => x
@@ -62,30 +71,11 @@ namespace Netology.MoreAboutOOP.Installers
 
             Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
                 .FromFactory<CompositeEnemyFactory>();
-
-            installProjectiles();
             
-            /*
-            Container.BindFactory<UnityEngine.Object, EnemyFacade, EnemyFacade.Factory>()
-                .FromMonoPoolableMemoryPool(poolBinder => poolBinder
-                        .FromFactory<PrefabFactory<EnemyFacade>>()
-                        .WithInitialSize(5)
-                        
-                    // .UnderTransformGroup("FooPool")
-                );
-            */
-            // Container.BindInterfacesAndSelfTo<GameInitializer>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
         }
 
-        private void InstallPlayer(DiContainer subContainer)
-        {
-            subContainer.Bind<PlayerController>().FromComponentOnRoot().AsSingle().NonLazy();
-            subContainer.Bind<PlayerInputHandler>().FromComponentOnRoot().AsSingle().NonLazy();
-            subContainer.BindInterfacesTo<PlayerShootHandler>().AsSingle();
-        }
-
-        private void installProjectiles()
+        void InstallProjectiles()
         {
             Container.Bind<ProjectileRegistry>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ProjectileMover>().AsSingle().NonLazy();
