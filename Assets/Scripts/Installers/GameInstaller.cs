@@ -43,10 +43,12 @@ namespace Netology.MoreAboutOOP.Installers
 
             Container.BindInterfacesTo<EnemiesLookAtPlayer>().AsSingle().NonLazy();
 
+            Container.BindInterfacesTo<EnemiesShootHandler>().AsSingle().NonLazy();
+
             Container.Bind<EnemySpawnPoint>().FromComponentsInHierarchy().AsTransient();
 
             var commonEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Common).Prefab;
-            Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.CommonEnemyFactory>()
+            Container.BindFactory<EnemyData, ProjectileTypes, Vector3, EnemyFacade, EnemyFacade.CommonEnemyFactory>()
                 .FromMonoPoolableMemoryPool(x => x
                     .WithInitialSize(2)
                     .FromSubContainerResolve()
@@ -56,7 +58,7 @@ namespace Netology.MoreAboutOOP.Installers
                     .UnderTransformGroup("Enemies"));
 
             var strongEnemyPrefab = _enemiesSettings.ForEnemyType(EnemyTypes.Strong).Prefab;
-            Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.StrongEnemyFactory>()
+            Container.BindFactory<EnemyData, ProjectileTypes, Vector3, EnemyFacade, EnemyFacade.StrongEnemyFactory>()
                 .FromMonoPoolableMemoryPool(x => x
                     .WithInitialSize(2)
                     // .FromComponentInNewPrefab(strongEnemyPrefab)
@@ -69,7 +71,7 @@ namespace Netology.MoreAboutOOP.Installers
             //     .ByNewPrefabInstaller<EnemyInstaller>(strongEnemyPrefab)
             //     .UnderTransformGroup("Enemies");
 
-            Container.BindFactory<EnemyData, Vector3, EnemyFacade, EnemyFacade.Factory>()
+            Container.BindFactory<EnemyData, ProjectileTypes, Vector3, EnemyFacade, EnemyFacade.Factory>()
                 .FromFactory<CompositeEnemyFactory>();
             
             Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();

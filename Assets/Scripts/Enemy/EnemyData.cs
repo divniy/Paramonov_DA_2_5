@@ -9,5 +9,6 @@ namespace Netology.MoreAboutOOP
         public EnemyTypes Type;
         public GameObject Prefab;
         public float MaxHealth = 100;
+        public float ShootingDistance = 10;
     }
 }

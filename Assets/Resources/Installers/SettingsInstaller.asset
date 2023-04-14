@@ -25,9 +25,11 @@ MonoBehaviour:
     - Type: 0
       Prefab: {fileID: 7160702175748792602, guid: f43dee03f6573437d87053ccc2314584, type: 3}
       MaxHealth: 100
+      ShootingDistance: 15
     - Type: 1
       Prefab: {fileID: 7647585798792018610, guid: 985bacedf65cc49b29adbeafaa8d2518, type: 3}
       MaxHealth: 150
+      ShootingDistance: 10
   Projectiles:
   - Type: 1
     Prefab: {fileID: 976231421010143624, guid: e8e729591676c45678fcd66bb7f67049, type: 3}

@@ -27,9 +27,10 @@ namespace Netology.MoreAboutOOP
             {
                 // Debug.Log(_enemyPrefabs[enemySpawnPoint.EnemyType]);
                 var enemyData = _settings.ForEnemyType(enemySpawnPoint.EnemyType);
+                var projectileType = enemySpawnPoint.ProjectileType;
                 var enemyPosition = enemySpawnPoint.transform.position;
                 Debug.LogFormat("Before spawn enemy with: {0}", enemyData);
-                var enemy = _enemyFactory.Create(enemyData, enemyPosition);
+                var enemy = _enemyFactory.Create(enemyData, projectileType, enemyPosition);
                 Debug.LogFormat("After spawn enemy: {0}", enemy);
                 // enemy.Transform.position = enemySpawnPoint.transform.position;
                 Debug.LogFormat("After set enemy position {0}", enemy.transform.position);
